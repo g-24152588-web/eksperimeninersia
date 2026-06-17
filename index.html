@@ -6,40 +6,63 @@
 <title>Eksperimen Maya Sains Tingkatan 4</title>
 <style>
 body{font-family:'Poppins',sans-serif;margin:0;padding:0;background:linear-gradient(135deg,#a8edea,#fed6e3);color:#333;text-align:center}
-.container{max-width:800px;margin:auto;padding:20px}
+.container{max-width:900px;margin:auto;padding:20px}
 .hidden{display:none}
-button{background:#ff6f61;color:#fff;border:none;padding:10px 20px;margin:10px;border-radius:8px;font-size:16px;cursor:pointer}
+button{background:#ff6f61;color:#fff;border:none;padding:12px 24px;margin:10px;border-radius:8px;font-size:16px;cursor:pointer;transition:0.3s}
 button:disabled{background:#ccc;cursor:not-allowed}
-button:hover:enabled{background:#ff3b2e}
-h1,h2,h3{color:#222}
-.drag-container{display:flex;flex-wrap:wrap;justify-content:center;margin:10px 0}
-.draggable{background:#fff;border:2px dashed #ff6f61;border-radius:8px;padding:8px 12px;margin:5px;cursor:grab}
-.dropzone{border:2px solid #333;border-radius:8px;min-height:40px;padding:10px;margin:5px;background:#f9f9f9}
-.correct{background:#b2f7b2!important}
-img{max-width:100%;height:auto;border-radius:10px;margin:10px 0}
-table{width:100%;border-collapse:collapse;margin:10px 0}
-th,td{border:1px solid #333;padding:8px;text-align:center}
-@media(max-width:600px){button{width:100%}}
+button:hover:enabled{background:#ff3b2e;transform:scale(1.05)}
+h1{color:#222;font-size:28px;margin-bottom:10px}
+h2{color:#444;font-size:24px;margin-top:30px}
+h3{color:#555;font-size:20px;margin-top:20px}
+input{padding:10px;margin:5px;border:2px solid #ff6f61;border-radius:5px;font-size:14px;width:80%;max-width:300px}
+.drag-container{display:flex;flex-wrap:wrap;justify-content:center;margin:15px 0;gap:8px}
+.draggable{background:#fff;border:2px dashed #ff6f61;border-radius:8px;padding:10px 15px;margin:5px;cursor:grab;font-size:14px;transition:0.2s}
+.draggable:hover{transform:scale(1.05);box-shadow:0 4px 8px rgba(0,0,0,0.2)}
+.dragging{opacity:0.5}
+.dropzone{border:2px solid #666;border-radius:8px;min-height:45px;min-width:150px;padding:10px;margin:8px;background:#f9f9f9;display:inline-block;transition:0.3s}
+.dropzone.correct{border-color:#28a745;background:#d4edda}
+.dropzone.wrong{border-color:#dc3545;background:#f8d7da}
+.diagram-container{margin:20px auto;max-width:600px}
+.diagram-container img{max-width:100%;height:auto;border:3px solid #333;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,0.3)}
+.label-boxes{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:15px}
+table{width:100%;max-width:600px;margin:20px auto;border-collapse:collapse;box-shadow:0 4px 8px rgba(0,0,0,0.2)}
+th,td{border:2px solid #333;padding:12px;text-align:center;font-size:14px}
+th{background:#ff6f61;color:#fff;font-weight:bold}
+.discussion{text-align:left;max-width:700px;margin:20px auto;background:#fff;padding:20px;border-radius:10px;box-shadow:0 4px 8px rgba(0,0,0,0.1)}
+.discussion p{margin:15px 0;line-height:1.6}
+.discussion b{color:#ff6f61}
+@media(max-width:600px){
+  h1{font-size:24px}
+  h2{font-size:20px}
+  button{width:90%;font-size:14px}
+  input{width:90%}
+  .draggable{font-size:12px;padding:8px 12px}
+  .dropzone{min-width:120px;font-size:12px}
+}
 </style>
 </head>
 <body>
 <div class="container">
+
+<!-- BAHAGIAN 1: MAKLUMAT MURID -->
 <section id="bahagian1">
-<h1>Eksperimen Maya Sains Tingkatan 4</h1>
+<h1>🔬 Eksperimen Maya Sains Tingkatan 4</h1>
 <h2>Bahagian 1 — Maklumat Murid</h2>
 <div>
-<label>Nama Murid:</label><br>
-<input type="text" id="nama" placeholder="Masukkan nama murid"><br><br>
-<label>Kelas:</label><br>
+<label><b>Nama Murid:</b></label><br>
+<input type="text" id="nama" placeholder="Masukkan nama murid"><br>
+<label><b>Kelas:</b></label><br>
 <input type="text" id="kelas" placeholder="Masukkan kelas"><br><br>
 <button onclick="mula()">MULA</button>
 </div>
 </section>
 
+<!-- BAHAGIAN 2: MAKLUMAT EKSPERIMEN -->
 <section id="bahagian2" class="hidden">
 <h2>Bahagian 2 — Maklumat Eksperimen</h2>
-<h3>Tujuan Eksperimen</h3>
-<p>Untuk mengkaji Kesan <span class="dropzone" id="drop1" data-answer="jisim"></span> terhadap <span class="dropzone" id="drop2" data-answer="inersia"></span>.</p>
+
+<h3>📌 Tujuan Eksperimen</h3>
+<p>Untuk mengkaji Kesan <span class="dropzone" data-answer="jisim"></span> terhadap <span class="dropzone" data-answer="inersia"></span>.</p>
 <div class="drag-container">
 <div class="draggable" draggable="true">jisim</div>
 <div class="draggable" draggable="true">inersia</div>
@@ -47,8 +70,8 @@ th,td{border:1px solid #333;padding:8px;text-align:center}
 <div class="draggable" draggable="true">geseran</div>
 </div>
 
-<h3>Hipotesis</h3>
-<p>Semakin bertambah <span class="dropzone" id="drop3" data-answer="jisim plastisin"></span> pada bilah gergaji, semakin lama <span class="dropzone" id="drop4" data-answer="masa yang diambil untuk 10 ayunan lengkap"></span>.</p>
+<h3>💡 Hipotesis</h3>
+<p>Semakin bertambah <span class="dropzone" data-answer="jisim plastisin"></span> pada bilah gergaji, semakin lama <span class="dropzone" data-answer="masa yang diambil untuk 10 ayunan lengkap"></span>.</p>
 <div class="drag-container">
 <div class="draggable" draggable="true">jisim plastisin</div>
 <div class="draggable" draggable="true">masa yang diambil untuk 10 ayunan lengkap</div>
@@ -56,10 +79,10 @@ th,td{border:1px solid #333;padding:8px;text-align:center}
 <div class="draggable" draggable="true">frekuensi</div>
 </div>
 
-<h3>Pembolehubah</h3>
-<p>(i) Dimanipulasikan: <span class="dropzone" id="drop5" data-answer="jisim plastisin"></span></p>
-<p>(ii) Bergerak balas: <span class="dropzone" id="drop6" data-answer="masa yang diambil untuk 10 ayunan lengkap"></span></p>
-<p>(iii) Dimalarkan: <span class="dropzone" id="drop7" data-answer="panjang bilah gergaji"></span></p>
+<h3>🔄 Pembolehubah</h3>
+<p>(i) Dimanipulasikan: <span class="dropzone" data-answer="jisim plastisin"></span></p>
+<p>(ii) Bergerak balas: <span class="dropzone" data-answer="masa yang diambil untuk 10 ayunan lengkap"></span></p>
+<p>(iii) Dimalarkan: <span class="dropzone" data-answer="panjang bilah gergaji"></span></p>
 <div class="drag-container">
 <div class="draggable" draggable="true">jisim plastisin</div>
 <div class="draggable" draggable="true">masa yang diambil untuk 10 ayunan lengkap</div>
@@ -67,28 +90,37 @@ th,td{border:1px solid #333;padding:8px;text-align:center}
 <div class="draggable" draggable="true">suhu bilik</div>
 </div>
 
-<h3>Radas dan Bahan</h3>
+<h3>🛠️ Radas dan Bahan</h3>
 <p>Pengapit-G, bilah gergaji, plastisin, penimbang dan jam randik.</p>
-<button id="btnNext2" onclick="next('bahagian2','bahagian3')" disabled>SETERUSNYA</button>
+<button id="btnNext2" onclick="nextSection('bahagian2','bahagian3')" disabled>SETERUSNYA</button>
 </section>
 
+<!-- BAHAGIAN 3: LAKARAN DAN PROSEDUR -->
 <section id="bahagian3" class="hidden">
 <h2>Bahagian 3 — Lakaran dan Prosedur</h2>
-<img src="https://i.imgur.com/1vZbZbK.png" alt="Lakaran eksperimen tanpa label">
-<p>Labelkan gambar dengan perkataan yang betul:</p>
-<div class="drag-container">
-<div class="draggable" draggable="true">pengapit-G</div>
-<div class="draggable" draggable="true">bilah gergaji</div>
-<div class="draggable" draggable="true">plastisin</div>
-<div class="draggable" draggable="true">kaki meja</div>
-</div>
-<div class="dropzone" data-answer="pengapit-G"></div>
-<div class="dropzone" data-answer="bilah gergaji"></div>
-<div class="dropzone" data-answer="plastisin"></div>
-<div class="dropzone" data-answer="kaki meja"></div>
 
-<h3>Prosedur</h3>
-<p>Susun langkah-langkah berikut:</p>
+<h3>📐 Lakaran Radas Eksperimen</h3>
+<div class="diagram-container">
+<!-- ARAHAN: Simpan gambar sebagai 'lakaran-eksperimen.png' dalam folder yang sama -->
+<img src="lakaran-eksperimen.png" alt="Lakaran eksperimen setup">
+</div>
+
+<p><b>Labelkan bahagian-bahagian radas dengan betul:</b></p>
+<div class="drag-container">
+<div class="draggable" draggable="true">Pengapit-G</div>
+<div class="draggable" draggable="true">Bilah gergaji</div>
+<div class="draggable" draggable="true">Plastisin</div>
+<div class="draggable" draggable="true">Kaki meja</div>
+</div>
+<div class="label-boxes">
+<div class="dropzone" data-answer="Pengapit-G"></div>
+<div class="dropzone" data-answer="Bilah gergaji"></div>
+<div class="dropzone" data-answer="Plastisin"></div>
+<div class="dropzone" data-answer="Kaki meja"></div>
+</div>
+
+<h3>📝 Prosedur</h3>
+<p><b>Susun langkah-langkah eksperimen mengikut urutan yang betul:</b></p>
 <div class="drag-container">
 <div class="draggable" draggable="true">Apit bilah gergaji pada kaki meja dengan pengapit-G.</div>
 <div class="draggable" draggable="true">Lekatkan plastisin berjisim 30g pada hujung bilah gergaji.</div>
@@ -96,65 +128,232 @@ th,td{border:1px solid #333;padding:8px;text-align:center}
 <div class="draggable" draggable="true">Rekodkan masa yang diambil untuk 10 ayunan lengkap dengan menggunakan jam randik.</div>
 <div class="draggable" draggable="true">Ulang langkah 1-4 dengan menggunakan jisim plastisin 40g, 50g, 60g dan 70g.</div>
 </div>
-<div class="dropzone" data-answer="Apit bilah gergaji pada kaki meja dengan pengapit-G."></div>
-<div class="dropzone" data-answer="Lekatkan plastisin berjisim 30g pada hujung bilah gergaji."></div>
-<div class="dropzone" data-answer="Sesar dan lepaskan bilah gergaji."></div>
-<div class="dropzone" data-answer="Rekodkan masa yang diambil untuk 10 ayunan lengkap dengan menggunakan jam randik."></div>
-<div class="dropzone" data-answer="Ulang langkah 1-4 dengan menggunakan jisim plastisin 40g, 50g, 60g dan 70g."></div>
+<div style="max-width:700px;margin:auto">
+<div class="dropzone" data-answer="Apit bilah gergaji pada kaki meja dengan pengapit-G." style="display:block;margin:10px auto"></div>
+<div class="dropzone" data-answer="Lekatkan plastisin berjisim 30g pada hujung bilah gergaji." style="display:block;margin:10px auto"></div>
+<div class="dropzone" data-answer="Sesar dan lepaskan bilah gergaji." style="display:block;margin:10px auto"></div>
+<div class="dropzone" data-answer="Rekodkan masa yang diambil untuk 10 ayunan lengkap dengan menggunakan jam randik." style="display:block;margin:10px auto"></div>
+<div class="dropzone" data-answer="Ulang langkah 1-4 dengan menggunakan jisim plastisin 40g, 50g, 60g dan 70g." style="display:block;margin:10px auto"></div>
+</div>
 
-<h3>Gambar Prosedur</h3>
-<img src="https://i.imgur.com/6vZbZbK.png" alt="Langkah 1 eksperimen">
-<img src="https://i.imgur.com/7vZbZbK.png" alt="Langkah 2 eksperimen">
-<img src="https://i.imgur.com/8vZbZbK.png" alt="Langkah 3 eksperimen">
-<img src="https://i.imgur.com/9vZbZbK.png" alt="Langkah 4 eksperimen">
-<button id="btnNext3" onclick="next('bahagian3','bahagian4')" disabled>SETERUSNYA</button>
+<button id="btnNext3" onclick="nextSection('bahagian3','bahagian4')" disabled>SETERUSNYA</button>
 </section>
 
+<!-- BAHAGIAN 4: PEMERHATIAN DAN PERBINCANGAN -->
 <section id="bahagian4" class="hidden">
 <h2>Bahagian 4 — Pemerhatian dan Perbincangan</h2>
-<p>Tahniah! Semua jawapan betul.</p>
+
+<h3>📊 Jadual Keputusan</h3>
+<p><b>Lengkapkan jadual dengan data yang betul:</b></p>
+<div class="drag-container">
+<div class="draggable" draggable="true">jisim plastisin (g)</div>
+<div class="draggable" draggable="true">masa yang diambil untuk 10 ayunan lengkap (s)</div>
+<div class="draggable" draggable="true">30</div>
+<div class="draggable" draggable="true">40</div>
+<div class="draggable" draggable="true">50</div>
+<div class="draggable" draggable="true">60</div>
+<div class="draggable" draggable="true">70</div>
+<div class="draggable" draggable="true">5</div>
+<div class="draggable" draggable="true">10</div>
+<div class="draggable" draggable="true">15</div>
+<div class="draggable" draggable="true">20</div>
+<div class="draggable" draggable="true">25</div>
+</div>
+
+<table>
+<tr>
+<th><span class="dropzone" data-answer="jisim plastisin (g)"></span></th>
+<th><span class="dropzone" data-answer="masa yang diambil untuk 10 ayunan lengkap (s)"></span></th>
+</tr>
+<tr>
+<td><span class="dropzone" data-answer="30"></span></td>
+<td><span class="dropzone" data-answer="5"></span></td>
+</tr>
+<tr>
+<td><span class="dropzone" data-answer="40"></span></td>
+<td><span class="dropzone" data-answer="10"></span></td>
+</tr>
+<tr>
+<td><span class="dropzone" data-answer="50"></span></td>
+<td><span class="dropzone" data-answer="15"></span></td>
+</tr>
+<tr>
+<td><span class="dropzone" data-answer="60"></span></td>
+<td><span class="dropzone" data-answer="20"></span></td>
+</tr>
+<tr>
+<td><span class="dropzone" data-answer="70"></span></td>
+<td><span class="dropzone" data-answer="25"></span></td>
+</tr>
+</table>
+
+<h3>💬 Perbincangan</h3>
+<div class="discussion">
+<p><b>1. Apakah hubungan antara jisim plastisin dan inersia?</b><br>
+<b>Jawapan:</b> Semakin bertambah jisim plastisin, semakin bertambah inersia.</p>
+
+<p><b>2. Apakah langkah berjaga-jaga dalam eksperimen ini?</b><br>
+<b>Jawapan:</b> Memastikan panjang bilah gergaji yang sama untuk semua percubaan.</p>
+
+<p><b>3. Sebuah kapal terbang memerlukan landasan yang panjang semasa mendarat untuk mengurangkan kesan inersia. Berdasarkan jadual keputusan, sokong pernyataan ini.</b><br>
+<b>Jawapan:</b> Masa yang diambil untuk 10 ayunan lengkap bagi jisim plastisin 70g adalah lebih lama (25s) berbanding jisim 30g (5s). Ini menunjukkan objek berjisim besar mempunyai inersia yang lebih tinggi dan memerlukan masa yang lebih lama untuk berhenti.</p>
+</div>
+
+<h3>📖 Definisi Secara Operasi</h3>
+<p><b>Lengkapkan definisi inersia:</b></p>
+<p>Inersia ialah <span class="dropzone" data-answer="keadaan"></span> yang ditunjukkan oleh <span class="dropzone" data-answer="masa yang diambil untuk 10 ayunan lengkap"></span> apabila <span class="dropzone" data-answer="plastisin pada bilah gergaji disesarkan dan dilepaskan"></span>.</p>
+<div class="drag-container">
+<div class="draggable" draggable="true">keadaan</div>
+<div class="draggable" draggable="true">masa yang diambil untuk 10 ayunan lengkap</div>
+<div class="draggable" draggable="true">plastisin pada bilah gergaji disesarkan dan dilepaskan</div>
+<div class="draggable" draggable="true">frekuensi ayunan</div>
+</div>
+
+<button id="btnNext4" onclick="selesai()" disabled>SELESAI</button>
 </section>
+
+<!-- BAHAGIAN 5: TAHNIAH -->
+<section id="bahagian5" class="hidden">
+<h1>🎉 TAHNIAH!</h1>
+<h2>Anda telah berjaya menyiapkan Eksperimen Maya Sains Tingkatan 4</h2>
+<p style="font-size:18px;margin-top:20px">Semua jawapan anda adalah betul! ✅</p>
+<button onclick="location.reload()">MULA SEMULA</button>
+</section>
+
 </div>
 
 <script>
+// Fungsi mula
 function mula(){
-document.getElementById('bahagian1').classList.add('hidden');
-document.getElementById('bahagian2').classList.remove('hidden');
+  const nama = document.getElementById('nama').value;
+  const kelas = document.getElementById('kelas').value;
+  if(nama && kelas){
+    document.getElementById('bahagian1').classList.add('hidden');
+    document.getElementById('bahagian2').classList.remove('hidden');
+  } else {
+    alert('Sila masukkan nama dan kelas!');
+  }
 }
-function next(current,next){
-document.getElementById(current).classList.add('hidden');
-document.getElementById(next).classList.remove('hidden');
+
+// Fungsi next section
+function nextSection(current, next){
+  document.getElementById(current).classList.add('hidden');
+  document.getElementById(next).classList.remove('hidden');
+  window.scrollTo(0,0);
 }
-const draggables=document.querySelectorAll('.draggable');
-const dropzones=document.querySelectorAll('.dropzone');
-draggables.forEach(d=>{
-d.addEventListener('dragstart',()=>{d.classList.add('dragging')});
-d.addEventListener('dragend',()=>{d.classList.remove('dragging')});
+
+// Fungsi selesai
+function selesai(){
+  document.getElementById('bahagian4').classList.add('hidden');
+  document.getElementById('bahagian5').classList.remove('hidden');
+  window.scrollTo(0,0);
+}
+
+// Drag and Drop functionality
+const draggables = document.querySelectorAll('.draggable');
+const dropzones = document.querySelectorAll('.dropzone');
+
+draggables.forEach(draggable => {
+  draggable.addEventListener('dragstart', () => {
+    draggable.classList.add('dragging');
+  });
+  
+  draggable.addEventListener('dragend', () => {
+    draggable.classList.remove('dragging');
+  });
 });
-dropzones.forEach(z=>{
-z.addEventListener('dragover',e=>{e.preventDefault()});
-z.addEventListener('drop',()=>{
-const dragged=document.querySelector('.dragging');
-if(dragged){
-z.textContent=dragged.textContent;
-if(z.dataset.answer===dragged.textContent){
-z.classList.add('correct');
-dragged.remove();
-checkCompletion();
-}else{
-z.style.background='#f8bcbc';
-}
-}
+
+dropzones.forEach(dropzone => {
+  dropzone.addEventListener('dragover', e => {
+    e.preventDefault();
+  });
+  
+  dropzone.addEventListener('drop', e => {
+    e.preventDefault();
+    const dragging = document.querySelector('.dragging');
+    if(dragging){
+      const answer = dragging.textContent.trim();
+      const correctAnswer = dropzone.dataset.answer;
+      
+      dropzone.textContent = answer;
+      dropzone.classList.remove('wrong');
+      
+      if(answer === correctAnswer){
+        dropzone.classList.add('correct');
+        dragging.remove();
+      } else {
+        dropzone.classList.add('wrong');
+        setTimeout(() => {
+          dropzone.classList.remove('wrong');
+          dropzone.textContent = '';
+        }, 1000);
+      }
+      
+      checkCompletion();
+    }
+  });
+  
+  // Touch support for mobile
+  dropzone.addEventListener('touchend', e => {
+    e.preventDefault();
+    const dragging = document.querySelector('.dragging');
+    if(dragging){
+      const answer = dragging.textContent.trim();
+      const correctAnswer = dropzone.dataset.answer;
+      
+      dropzone.textContent = answer;
+      dropzone.classList.remove('wrong');
+      
+      if(answer === correctAnswer){
+        dropzone.classList.add('correct');
+        dragging.remove();
+      } else {
+        dropzone.classList.add('wrong');
+        setTimeout(() => {
+          dropzone.classList.remove('wrong');
+          dropzone.textContent = '';
+        }, 1000);
+      }
+      
+      checkCompletion();
+    }
+  });
 });
+
+// Touch support for draggables
+draggables.forEach(draggable => {
+  draggable.addEventListener('touchstart', () => {
+    draggable.classList.add('dragging');
+  });
+  
+  draggable.addEventListener('touchend', () => {
+    setTimeout(() => {
+      draggable.classList.remove('dragging');
+    }, 100);
+  });
 });
+
+// Check completion
 function checkCompletion(){
-const allZones=document.querySelectorAll('#bahagian2 .dropzone');
-const allCorrect=[...allZones].every(z=>z.classList.contains('correct'));
-if(allCorrect)document.getElementById('btnNext2').disabled=false;
-const allZones2=document.querySelectorAll('#bahagian3 .dropzone');
-const allCorrect2=[...allZones2].every(z=>z.classList.contains('correct'));
-if(allCorrect2)document.getElementById('btnNext3').disabled=false;
+  // Check Bahagian 2
+  const zones2 = document.querySelectorAll('#bahagian2 .dropzone');
+  const allCorrect2 = Array.from(zones2).every(z => z.classList.contains('correct'));
+  document.getElementById('btnNext2').disabled = !allCorrect2;
+  if(allCorrect2) document.getElementById('btnNext2').style.background = '#28a745';
+  
+  // Check Bahagian 3
+  const zones3 = document.querySelectorAll('#bahagian3 .dropzone');
+  const allCorrect3 = Array.from(zones3).every(z => z.classList.contains('correct'));
+  document.getElementById('btnNext3').disabled = !allCorrect3;
+  if(allCorrect3) document.getElementById('btnNext3').style.background = '#28a745';
+  
+  // Check Bahagian 4
+  const zones4 = document.querySelectorAll('#bahagian4 .dropzone');
+  const allCorrect4 = Array.from(zones4).every(z => z.classList.contains('correct'));
+  document.getElementById('btnNext4').disabled = !allCorrect4;
+  if(allCorrect4) document.getElementById('btnNext4').style.background = '#28a745';
 }
 </script>
+
 </body>
 </html>
